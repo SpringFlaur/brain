@@ -1,5 +1,4 @@
 <?php
-echo 'test';die;
 $PHP_DIR = dirname(__DIR__);
 
 //初始化路径变量，引用autoload.php，初始化container
