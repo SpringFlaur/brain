@@ -1,4 +1,7 @@
 <?php
+
+use brain\frame\Rapid;
+
 $PHP_DIR = dirname(__DIR__);
 
 //初始化路径变量，引用autoload.php，初始化container
@@ -8,4 +11,12 @@ include_once $PHP_DIR . '/lib/init.php';
 
 global $container;
 
-var_dump($container['siteConf']);
+
+$app = new \Slim\Slim();
+$method = strtolower($app->request->getMethod());
+$app->$method('(/:params+)', function ($params) use ($app) {
+    $rapid = new Rapid($app, 'brain\\api');
+    $rapid->setRoute($app, $params);
+    $rapid->run();
+});
+$app->run();
