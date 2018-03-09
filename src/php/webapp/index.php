@@ -1,5 +1,4 @@
 <?php
-phpinfo();die;
 
 use brain\frame\Rapid;
 
