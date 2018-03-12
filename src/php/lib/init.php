@@ -5,6 +5,7 @@ namespace brain;
 global $container;
 global $APP_ROOT;
 
+use brain\service\user\UserService;
 use brain\service\Util\Util;
 use Medoo\Medoo;
 
@@ -22,4 +23,8 @@ $container['db'] = function ($c) {
         'password' => Util::conf('dbpassword'),
         'charset' => 'utf8'
     ));
+};
+
+$container['user'] = function ($c) {
+    return new UserService($c['db']);
 };
