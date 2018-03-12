@@ -16,7 +16,7 @@ $container['siteConf'] = $siteConf;
 $container['db'] = function ($c) {
     return new Medoo(array(
         'database_type' => 'mysql',
-        'database_name' => Util::conf('enjoy'),
+        'database_name' => Util::conf('database'),
         'server' => Util::conf('dbhost'),
         'username' => Util::conf('dbuser'),
         'password' => Util::conf('dbpassword'),
