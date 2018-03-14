@@ -15,7 +15,7 @@ class UserService {
     }
 
     //用户已注册
-    public function getUser($email) {
+    public function getUserByemail($email) {
         $rs = $this->db->select('users', '*', [
             'email[=]' => $email,
         ]);
@@ -26,9 +26,20 @@ class UserService {
         }
     }
 
+    public function getUserById($userId) {
+        $rs = $this->db->select('users', '*', [
+            'user_id[=]' => $userId,
+        ]);
+        if (is_array($rs) && !empty($rs)) {
+            return $rs[0];
+        } else {
+            return false;
+        }
+    }
+
     //用户注册
     public function register($email, $password) {
-        if ($this->getUser($email)) {
+        if ($this->getUserByemail($email)) {
             return false;
         } else {
             $rs = $this->db->insert('users', [

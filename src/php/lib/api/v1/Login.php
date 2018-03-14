@@ -15,7 +15,7 @@ class Login extends Controller {
         $password = $this->app->request->post('password');
         /** @var UserService $userService */
         $userService = $container['user'];
-        $user = $userService->getUser($email);
+        $user = $userService->getUserByemail($email);
         if ($user === false) {
             $this->response(-1, '用户不存在');
         }
@@ -24,6 +24,7 @@ class Login extends Controller {
         }
         $this->response(0, '登陆成功', [
             'token' => $user['token'],
+            'user_id' => $user['user_id'],
         ]);
     }
 }
