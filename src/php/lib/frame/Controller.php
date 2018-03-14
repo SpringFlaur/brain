@@ -27,7 +27,7 @@ class Controller {
         echo json_encode([
             'code' => $code,
             'msg' => $msg,
-            'data' => $data
+            'data' => json_encode($data),
         ]);
         die;
     }
