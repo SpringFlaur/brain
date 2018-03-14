@@ -34,6 +34,8 @@ class UserService {
             $rs = $this->db->insert('users', [
                 'email' => $email,
                 'password' => $password,
+                'reg_time' => date("Y-m-d H:i:s", time()),
+                'token' => md5($email . time()),
             ]);
             return $rs;
         }
