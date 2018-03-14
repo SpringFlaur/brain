@@ -4,7 +4,6 @@ namespace brain\api\v1;
 
 use brain\frame\Controller;
 use brain\service\user\UserService;
-use Medoo\Medoo;
 
 //注册接口
 class Register extends Controller {
@@ -16,7 +15,7 @@ class Register extends Controller {
         $userService = $container['user'];
         $rs = $userService->register($email, $password);
         $code = 0;
-        $msg = '';
+        $msg = '注册成功';
         if ($rs === false) {
             $code = -1;
             $msg = '用户已存在';

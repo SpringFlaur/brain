@@ -15,12 +15,12 @@ class UserService {
     }
 
     //用户已注册
-    public function userExist($email) {
-        $rs = $this->db->select('users', [], '*', [
+    public function getUser($email) {
+        $rs = $this->db->select('users', '*', [
             'email[=]' => $email,
         ]);
         if (is_array($rs) && !empty($rs)) {
-            return true;
+            return $rs[0];
         } else {
             return false;
         }
@@ -28,7 +28,7 @@ class UserService {
 
     //用户注册
     public function register($email, $password) {
-        if ($this->userExist($email)) {
+        if ($this->getUser($email)) {
             return false;
         } else {
             $rs = $this->db->insert('users', [

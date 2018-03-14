@@ -23,18 +23,13 @@ class Controller {
     }
 
 
-    public function response($code, $msg = '', $data = [], $callback = '') {
+    public function response($code, $msg = '', $data = []) {
         echo json_encode([
             'code' => $code,
             'msg' => $msg,
             'data' => $data
         ]);
-        if ($callback != '') {
-            if (function_exists('fastcgi_finish_request')) {
-                fastcgi_finish_request();
-            }
-            $callback();
-        }
+        die;
     }
 
 }
