@@ -48,12 +48,12 @@ class Controller {
         $user = $userService->getUserById($userId);
         //user_id不存在
         if ($user === false) {
-            $this->response(-1, '请求错误');
+            $this->response(406, '请求错误');
         }
         $token = $user['token'];
         //校验
         if ($uuid != md5($userId . $token . $timeStamp)) {
-            $this->response(-1, '请求错误');
+            $this->response(406, '请求错误');
         }
     }
 }

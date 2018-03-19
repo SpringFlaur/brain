@@ -22,8 +22,12 @@ class Login extends Controller {
         if ($password !== $user['password']) {
             $this->response(-1, '账号密码错误');
         }
+        $token = md5($email . time() . $password);
+        $userService->updateUser([
+            'token' => $token
+        ], $user['user_id']);
         $this->response(0, '登陆成功', [
-            'token' => $user['token'],
+            'token' => $token,
             'user_id' => $user['user_id'],
         ]);
     }
