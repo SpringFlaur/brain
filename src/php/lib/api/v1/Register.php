@@ -20,6 +20,12 @@ class Register extends Controller {
             $code = -1;
             $msg = '用户已存在';
         }
-        $this->response($code, $msg);
+        $data = new \stdClass();
+        if ($code === 0) {
+            $user = $userService->getUserByemail($email);
+            $data->user_id = $user['user_id'];
+            $data->token = $user['token'];
+        }
+        $this->response($code, $msg, $data);
     }
 }
