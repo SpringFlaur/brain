@@ -17,18 +17,29 @@ class Controller {
     /** @var Container */
     protected $container;
 
+    /** @var \stdClass 返回内容 */
+    protected $data;
+
     public function __construct(Slim $app, $container, Route $route) {
         $this->app = $app;
         $this->container = $container;
         $this->route = $route;
+        $this->data = new \stdClass();
     }
 
+    public function setResponse($key, $value) {
+        $this->data->$key = $value;
+    }
 
-    public function response($code, $msg = '', $data = []) {
+    public function getResponse($key) {
+        return isset($this->data->$key) ? $this->data->$key : null;
+    }
+
+    public function response($code, $msg = '') {
         echo json_encode([
             'code' => $code,
-            'msg' => $msg,
-            'data' => json_encode($data),
+            'msg'  => $msg,
+            'data' => json_encode($this->data),
         ]);
         die;
     }
