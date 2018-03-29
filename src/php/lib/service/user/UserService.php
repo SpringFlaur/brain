@@ -38,24 +38,34 @@ class UserService {
     }
 
     //用户注册
-    public function register($email, $password) {
+    public function register($email, $password, $nick = null, $gender = null, $description = null) {
         if ($this->getUserByemail($email)) {
             return false;
         } else {
-            $rs = $this->db->insert('users', [
-                'email' => $email,
+            $user = [
+                'email'    => $email,
                 'password' => $password,
                 'reg_time' => date("Y-m-d H:i:s", time()),
-                'token' => md5($email . time()),
-            ]);
+                'token'    => md5($email . time()),
+            ];
+            if ($nick) {
+                $user['nick'] = $nick;
+            }
+            if ($gender) {
+                $user['gender'] = $gender;
+            }
+            if ($description) {
+                $user['description'] = $description;
+            }
+            $rs = $this->db->insert('users', $user);
             return $rs;
         }
     }
 
     //更新用户信息
     public function updateUser(array $params, $userId) {
-        $this->db->update('users',$params,[
-            'user_id[=]'=>$userId,
+        $this->db->update('users', $params, [
+            'user_id[=]' => $userId,
         ]);
     }
 

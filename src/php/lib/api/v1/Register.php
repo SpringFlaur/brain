@@ -16,33 +16,18 @@ class Register extends Controller {
         $description = $this->app->request->post('description');
         /** @var UserService $userService */
         $userService = $container['user'];
-        $rs = $userService->register($email, $password);
-        $code = 0;
-        $msg = '注册成功';
+        $rs = $userService->register($email, $password, $nick, $gender, $description);
         if ($rs === false) {
             $code = -1;
             $msg = '用户已存在';
             $this->response($code, $msg);
         }
         $user = $userService->getUserByemail($email);
-        $userInfo = [];
-        if ($nick) {
-            $userInfo['nick'] = $nick;
-        }
-        if ($gender) {
-            $userInfo['gender'] = $gender;
-        }
-        if ($description) {
-            $userInfo['description'] = $description;
-        }
-        if (!empty($userInfo)) {
-            $userService->updateUser($userInfo, $user['user_id']);
-        }
         $this->setResponse('user_id', $user['user_id']);
         $this->setResponse('token', $user['token']);
-        $this->setResponse('nick', $nick);
-        $this->setResponse('gender', $gender);
-        $this->setResponse('description', $description);
-        $this->response($code, $msg);
+        $this->setResponse('nick', $user['nick']);
+        $this->setResponse('gender', $user['gender']);
+        $this->setResponse('description', $user['description']);
+        $this->response(0, '注册成功');
     }
 }
