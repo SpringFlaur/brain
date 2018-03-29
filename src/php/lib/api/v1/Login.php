@@ -28,9 +28,9 @@ class Login extends Controller {
             'token' => $token
         ], $user['user_id']);
         $this->setResponse('token', $token);
-        $this->setResponse('user_id', $user['user_id']);
+        $this->setResponse('user_id', intval($user['user_id']));
         $this->setResponse('photo', $user['photo']);
-        $this->setResponse('gender', $user['gender']);
+        $this->setResponse('gender', intval($user['gender']));
         $this->setResponse('user_nick', $user['nick']);
         $this->setResponse('user_desc', $user['description']);
         $this->response(0, '登陆成功');

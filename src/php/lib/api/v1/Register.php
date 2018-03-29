@@ -23,10 +23,10 @@ class Register extends Controller {
             $this->response($code, $msg);
         }
         $user = $userService->getUserByemail($email);
-        $this->setResponse('user_id', $user['user_id']);
+        $this->setResponse('user_id', intval($user['user_id']));
         $this->setResponse('token', $user['token']);
         $this->setResponse('nick', $user['nick']);
-        $this->setResponse('gender', $user['gender']);
+        $this->setResponse('gender', intval($user['gender']));
         $this->setResponse('description', $user['description']);
         $this->response(0, '注册成功');
     }
