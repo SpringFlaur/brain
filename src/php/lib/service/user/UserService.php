@@ -50,6 +50,8 @@ class UserService {
             ];
             if ($nick) {
                 $user['nick'] = $nick;
+            } else {
+                $user['nick'] = "用户" . time();
             }
             if ($gender) {
                 $user['gender'] = $gender;
