@@ -39,7 +39,7 @@ class Controller {
         echo json_encode([
             'code' => $code,
             'msg'  => $msg,
-            'data' => json_encode($this->data),
+            'data' => $this->data,
         ]);
         die;
     }
