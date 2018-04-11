@@ -3,6 +3,7 @@
 namespace brain\frame;
 
 use brain\service\user\UserService;
+use brain\service\Util\Util;
 use Pimple\Container;
 use Slim\Slim;
 
@@ -44,11 +45,13 @@ class Controller {
         die;
     }
 
-    //校验请求
+    /**
+     * 根据header中的内容校验请求
+     */
     public function checkToken() {
-        $userId = $_SERVER['HTTP_USERID'];
-        $timeStamp = $_SERVER['HTTP_TIMESTAMP'];
-        $uuid = $_SERVER['HTTP_UUID'];
+        $userId = Util::headerConf('userid');
+        $timeStamp = Util::headerConf('timestamp');
+        $uuid = Util::headerConf('uuid');;
         //任何参数没有设置或timestamp与当前时间相差两秒以上则失败
         if ($userId == null || $timeStamp == null || $uuid == null || time() - intval($uuid) > 2) {
             $this->response(-1, '请求错误');
