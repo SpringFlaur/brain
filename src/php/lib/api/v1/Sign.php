@@ -3,14 +3,16 @@
 namespace brain\api\v1;
 
 use brain\frame\Controller;
+use brain\service\Util\Util;
 
 //获取鉴权签名
 class Sign extends Controller {
     public function postAction() {
-        $appid = "200001";
-        $bucket = "newbucket";
-        $secret_id = "AKIDUfLUEUigQiXqm7CVSspKJnuaiIKtxqAv";
-        $secret_key = "bLcPnl88WU30VY57ipRhSePfPdOfSruK";
+        $tencentCloud = Util::conf('tencentCloud');
+        $appid = $tencentCloud['appid'];
+        $bucket = $tencentCloud['bucket'];
+        $secret_id = $tencentCloud['secret_id'];
+        $secret_key = $tencentCloud['secret_key'];
         $onceExpired = 0;
         $current = time();
         $rdm = rand();
@@ -20,5 +22,10 @@ class Sign extends Controller {
         $once_signature = base64_encode(hash_hmac('SHA1', $once_signature, $secret_key, true) . $once_signature);
         $this->setResponse('sign', $once_signature);
         $this->response(0, '');
+    }
+
+    public function getAction() {
+        $this->setResponse('name', gethostbyaddr($_SERVER['REMOTE_ADDR']));
+        $this->response(0);
     }
 }
