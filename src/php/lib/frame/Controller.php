@@ -45,10 +45,10 @@ class Controller {
     }
 
     //校验请求
-    public function checkToken($usePost = false) {
-        $userId = $usePost ? $this->app->request->post('user_id') : $this->app->request->get('user_id');
-        $timeStamp = $usePost ? $this->app->request->post('time_stamp') : $this->app->request->get('time_stamp');
-        $uuid = $usePost ? $this->app->request->post('uuid') : $this->app->request->get('uuid');
+    public function checkToken() {
+        $userId = $_SERVER['HTTP_USERID'];
+        $timeStamp = $_SERVER['HTTP_TIMESTAMP'];
+        $uuid = $_SERVER['HTTP_UUID'];
         //任何参数没有设置或timestamp与当前时间相差两秒以上则失败
         if ($userId == null || $timeStamp == null || $uuid == null || time() - intval($uuid) > 2) {
             $this->response(-1, '请求错误');
