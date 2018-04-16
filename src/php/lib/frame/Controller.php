@@ -51,9 +51,9 @@ class Controller {
     public function checkToken() {
         $userId = Util::headerConf('userid');
         $timeStamp = Util::headerConf('timestamp');
-        $uuid = Util::headerConf('uuid');;
-        //任何参数没有设置或timestamp与当前时间相差两秒以上则失败
-        if ($userId == null || $timeStamp == null || $uuid == null || time() - intval($uuid) > 2) {
+        $uuid = Util::headerConf('uuid');
+        //任何参数没有设置或timestamp与当前时间相差五分钟以上则失败
+        if ($userId == null || $timeStamp == null || $uuid == null || time() - intval($timeStamp) > 300) {
             $this->response(-1, '请求错误');
         }
         global $container;
