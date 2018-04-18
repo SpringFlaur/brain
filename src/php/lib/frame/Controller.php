@@ -49,7 +49,7 @@ class Controller {
      * 根据header中的内容校验请求
      */
     public function checkToken() {
-        $userId = Util::headerConf('userid');
+        $userId = Util::headerConf('uid');
         $timeStamp = Util::headerConf('timestamp');
         $uuid = Util::headerConf('uuid');
         //任何参数没有设置或timestamp与当前时间相差五分钟以上则失败

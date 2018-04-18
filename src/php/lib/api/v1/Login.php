@@ -31,8 +31,8 @@ class Login extends Controller {
         $this->setResponse('user_id', intval($user['user_id']));
         $this->setResponse('photo', $user['photo']);
         $this->setResponse('gender', intval($user['gender']));
-        $this->setResponse('user_nick', $user['nick']);
-        $this->setResponse('user_desc', $user['description']);
+        $this->setResponse('nick', $user['nick']);
+        $this->setResponse('description', $user['description']);
         $this->response(0, '登陆成功');
     }
 }
