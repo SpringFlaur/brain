@@ -66,7 +66,7 @@ class UserService {
 
     //更新用户信息
     public function updateUser(array $params, $userId) {
-        $this->db->update('users', $params, [
+        return $this->db->update('users', $params, [
             'user_id[=]' => $userId,
         ]);
     }

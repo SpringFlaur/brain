@@ -70,4 +70,16 @@ class Controller {
             $this->response(406, '请求错误');
         }
     }
+
+    public function getAction() {
+        $this->response(404, md5(time()));
+    }
+
+    public function postAction() {
+        $this->response(404, md5(time()));
+    }
+
+    public function putAction() {
+        $this->response(404, md5(time()));
+    }
 }
